@@ -67,7 +67,7 @@ namespace BugStore.Api.Data.Migrations
                         .HasMaxLength(160)
                         .HasColumnType("VARCHAR");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

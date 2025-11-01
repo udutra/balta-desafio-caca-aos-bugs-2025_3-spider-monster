@@ -53,11 +53,18 @@ public class ProductHandler(AppDbContext context) : IHandlerProduct{
         CancellationToken cancellationToken = default){
 
         try{
-            var products = await context.Products
-                .AsNoTracking()
+            var query = context.Products.AsNoTracking().OrderBy(x => x.Title);
+
+            var total = query.CountAsync(cancellationToken);
+
+            var products = query
+                .Skip((request.PageNumber - 1) * request.PageSize)
+                .Take(request.PageSize)
                 .ToListAsync(cancellationToken);
 
-            return new GetAllProductsResponse(products);
+            await Task.WhenAll(total, products);
+
+            return new GetAllProductsResponse(products.Result, total.Result, request.PageNumber, request.PageSize);
         }
         catch (OperationCanceledException){
             return new GetAllProductsResponse([], 499, "Operação cancelada.");

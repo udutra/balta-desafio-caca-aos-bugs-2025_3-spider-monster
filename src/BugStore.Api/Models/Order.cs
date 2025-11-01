@@ -11,10 +11,12 @@ public class Order
 
     private Order() { }
 
-    internal Order(Guid customerId, Customer customer, List<OrderLine> lines)
-    {
+    public Order(Customer customer, List<OrderLine> lines){
+        if (customer == null)
+            throw new ArgumentException("Produto não pode ser nullo", nameof(customer));
+
         Id = Guid.CreateVersion7();
-        CustomerId = customerId;
+        CustomerId = customer.Id;
         Customer = customer;
         Lines = lines;
         CreatedAt = DateTime.UtcNow;

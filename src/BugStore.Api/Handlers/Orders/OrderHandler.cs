@@ -12,7 +12,7 @@ public class OrderHandler(AppDbContext context) : IHandlerOrder{
     public async Task<CreateOrderResponse> CreateOrderAsync(CreateOrderRequest request,
         CancellationToken cancellationToken = default){
         try{
-            var order = new Order(request.CustomerId, request.Customer, request.Lines);
+            var order = new Order(request.Customer, request.Lines);
             await context.Orders.AddAsync(order, cancellationToken);
             await context.SaveChangesAsync(cancellationToken);
 

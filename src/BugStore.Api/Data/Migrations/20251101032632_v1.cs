@@ -48,7 +48,7 @@ namespace BugStore.Api.Data.Migrations
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     CustomerId = table.Column<Guid>(type: "VARCHAR", maxLength: 160, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

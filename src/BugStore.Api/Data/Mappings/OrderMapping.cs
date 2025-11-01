@@ -19,7 +19,7 @@ public class OrderMapping : IEntityTypeConfiguration<Order>{
             .IsRequired();
 
         builder.Property(x => x.UpdatedAt)
-            .IsRequired();
+            .IsRequired(false);
 
         builder.HasIndex(x => x.CustomerId);
 

@@ -1,9 +1,44 @@
 namespace BugStore.Api.Models;
 
-public class Customer(string name, string email, string phone, DateTime birthDate){
-    public Guid Id { get;  set; } = Guid.CreateVersion7();
-    public string Name { get; set; } = name;
-    public string Email { get; set; } = email;
-    public string Phone { get; set; } = phone;
-    public DateTime BirthDate { get; set; } = birthDate;
+public class Customer{
+    public Guid Id { get;  set; }
+    public string Name { get; set; }
+    public string Email { get; set; }
+    public string Phone { get; set; }
+    public DateTime BirthDate { get; set; }
+
+    public Customer(string name, string email, string phone, DateTime birthDate){
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentException("O nome não pode ser vazio.", nameof(name));
+
+        if (string.IsNullOrWhiteSpace(email))
+            throw new ArgumentException("O e-mail não pode ser vazio.", nameof(email));
+
+        if (string.IsNullOrWhiteSpace(phone))
+            throw new ArgumentException("O telefone não pode ser vazio.", nameof(phone));
+
+        Id = Guid.CreateVersion7();
+        Name = name.Trim();
+        Email = email.Trim();
+        Phone = phone.Trim();
+        BirthDate = birthDate;
+    }
+
+    public void Update(string? name, string? email, string? phone, DateTime? birthDate){
+        if (!string.IsNullOrWhiteSpace(name)){
+            Name = name;
+        }
+
+        if (!string.IsNullOrWhiteSpace(email)){
+            Email = email;
+        }
+
+        if (!string.IsNullOrWhiteSpace(phone)){
+            Phone = phone;
+        }
+
+        if (birthDate != null){
+            BirthDate = birthDate.Value;
+        }
+    }
 }

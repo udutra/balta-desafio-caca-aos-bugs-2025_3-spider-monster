@@ -87,15 +87,8 @@ public class CustomerHandler(AppDbContext context) : IHandlerCustomer{
                 return new UpdateCustomerResponse(null, 404, "Cliente não encontrado.");
             }
 
-            if (!string.IsNullOrWhiteSpace(request.Name))
-                customer.Name = request.Name;
-            if (!string.IsNullOrWhiteSpace(request.Email))
-                customer.Email = request.Email;
-            if (!string.IsNullOrWhiteSpace(request.Phone))
-                customer.Phone = request.Phone;
-            if (request.BirthDate != null)
-                customer.BirthDate = request.BirthDate.Value;
-
+            customer.Update(request.Name, request.Email, request.Phone, request.BirthDate);
+            
             context.Customers.Update(customer);
             await context.SaveChangesAsync(cancellationToken);
 

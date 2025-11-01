@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BugStore.Api.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251031231541_v1")]
+    [Migration("20251101032632_v1")]
     partial class v1
     {
         /// <inheritdoc />
@@ -70,7 +70,7 @@ namespace BugStore.Api.Data.Migrations
                         .HasMaxLength(160)
                         .HasColumnType("VARCHAR");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
